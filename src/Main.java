@@ -106,16 +106,31 @@ public class Main {
         System.out.print(" (");
         System.out.print(minValue);
         System.out.println(") ");
+        System.out.println("");
 
-        printCars(100);
+        printCars(100, cars);
+        printCars(200, cars);
+        printCars(300, cars);
+        printCars(400, cars);
     }
 
-    private static void printCars(Integer type) {
-        System.out.print(type);
+    private static void printCars(Integer type, ArrayList<Car> cars) {
+//        System.out.print(cars.get(0).getCodeCar());
+        for (Car item: cars) {
+            if(item.getCodeCar().equals(type)){
+                System.out.print("тип: ");
+                System.out.println(item.getCodeCar());
+                System.out.print("номер: ");
+                System.out.println(item.getNumber());
+                System.out.print("пробег: ");
+                System.out.println(item.getMileage());
+                System.out.print("доп. параметр: ");
+                System.out.println(item.getAdditionally());
+                System.out.println("");
+            }
+        }
     }
 
-//    void printCars(Integer type){
-//
-//    }
+
 
 }
