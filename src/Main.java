@@ -59,23 +59,63 @@ public class Main {
         System.out.print("общая стоимость расходов на ГСМ: ");
         System.out.println(fullPrice);
 
+        Double maxValue = 0.;
+        Double minValue = 0.;
+        String maxType = "";
+        String minType = "";
+        Integer index = 0;
 
         for (Integer item: typeCar.keySet()) {
             System.out.print("стоимость расходов на ");
             System.out.print(typeCar.get(item));
             System.out.print(": ");
             Double price = 0.;
-            
+
             for (Car car: cars) {
                 if(car.getCodeCar().equals(item)) {
                     price += car.getMileage() / 100 * fuelConsumption.get(car.getCodeCar()) * costLiterFuel.get(car.getCodeCar());
                 }
             }
+            if(index == 0){
+                maxValue = price;
+                minValue = price;
+                maxType = typeCar.get(item);
+                minType = typeCar.get(item);
+            }else{
+                if(price> maxValue){
+                    maxValue = price;
+                    maxType = typeCar.get(item);
+                }
+                if(price< minValue){
+                    minValue = price;
+                    minType = typeCar.get(item);
+                }
+            }
+
             System.out.println(price);
+            index += 1;
         }
+        System.out.print("тип авто имеющий наибольшую стоимость расходов - ");
+        System.out.print(maxType);
+        System.out.print(" (");
+        System.out.print(maxValue);
+        System.out.println(") ");
+
+        System.out.print("тип авто имеющий наименьшую стоимость расходов - ");
+        System.out.print(minType);
+        System.out.print(" (");
+        System.out.print(minValue);
+        System.out.println(") ");
+
+        printCars(100);
     }
 
-    void printCars(Integer type){
-
+    private static void printCars(Integer type) {
+        System.out.print(type);
     }
+
+//    void printCars(Integer type){
+//
+//    }
+
 }
