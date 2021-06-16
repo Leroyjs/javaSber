@@ -7,8 +7,6 @@
  * Входные данные = "Ivan 5", "Petr 3", "Alex 10", "Petr 8", "Ivan 6", "Alex 5", "Ivan 1", "Petr 5", "Alex 1"
  */
  
-import models.Car;
- 
 import java.util.*;
  
 public class HW3_ex3 {
@@ -21,17 +19,26 @@ public class HW3_ex3 {
     }
  
     public static String howWinner(String[] players) {
-        HashMap<Integer, String> playersCollection = new HashMap<>();
+        HashMap<String, Integer> playersCollection = new HashMap<>();
+        String bestName = "";
+        Integer bestScore = 0;
  
         for (String player : players) {
             String playerName = player.split(" ")[0];
-            int playerScore = Integer.valueOf(player.split(" ")[1]);
+            Integer playerScore = Integer.valueOf(player.split(" ")[1]);
  
-            if (playersCollection.getOrDefault(playerScore, "").isEmpty())
-                playersCollection.put(playerScore, playerName);
+            if (playersCollection.containsKey(playerName)) {
+                playerScore += playersCollection.get(playerName);
+            }
+ 
+            if (playerScore > bestScore) {
+                bestName = playerName;
+                bestScore = playerScore;
+            }
+ 
+            playersCollection.put(playerName, playerScore);
         }
  
-        int winnerKey = Collections.max(playersCollection.keySet());
-        return playersCollection.get(winnerKey);
+        return bestName;
     }
 }
